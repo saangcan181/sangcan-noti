@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: sangcan-noti-backend
+    runtime: node
+    env: node
+    region: oregon # or singapore for better latency to Asia
+    plan: starter # free tier
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DB_HOST
+        value: metro.proxy.rlwy.net
+      - key: DB_PORT
+        value: 20857
+      - key: DB_USER
+        value: root
+      - key: DB_PASSWORD
+        value: FfHNRIyipxOqRwWDdZZbjTzYhOWBonXQ
+      - key: DB_NAME
+        value: railway
+      - key: JWT_SECRET
+        value: your-super-secret-jwt-key-minimum-32-characters-long
+      - key: FRONTEND_URL
+        value: https://localhost:3000
+    rootDir: packages/backend
+    healthCheckPath: /health
+    
+    # Auto-deploy from main branch
+    autoDeploy: true
+    
+    # Railway MySQL Connection Details:
+    # Full URL: mysql://root:FfHNRIyipxOqRwWDdZZbjTzYhOWBonXQ@metro.proxy.rlwy.net:20857/railway
